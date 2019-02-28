@@ -6,7 +6,8 @@ This library provides a simple-to-use, lightweight, FastLED-like interface for O
 
 # Boards
 This library was designed to run on boards styled like this:
-![Open-Smart Driver](https://img.dxcdn.com/productimages/sku_314667_1.jpg "Open-Smart Driver")
+![Open-Smart Driver][driver]
+
 Open-Smart makes lots of these useful little drivers. Each can drive one standard (5 meter) RGB LED strip, and you can daisy chain multiple together if you need.
 
 # Motivations
@@ -57,8 +58,12 @@ driver.update();
 And that's it!
 
 # A Few Notes
-**Clock Rate:** in most implementations of the library, a clock period is defined and data is clocked out at that speed. The Seeed Studio library uses a clock rate of 50kHz (40us period). This really isn't optimally fast as the P9813 can clock at 10MHz. At a rate this high, we're looking at a period of 100ns. Since the Arduino Uno's 16MHz ticks every 62.4 ns, you'd have to write the code very carefully to try to get near 10MHz rates. Instead, I just opted to take all delays out and let the library pulse as fast as it can (which is indeed fast enough). If you run this code on something with a much higher clock rate, like 50MHz, and you notice trasnmission errors, it would make sense to add some kind of delay to the clock function in `OpenSmartDriver.cpp`.
+**Clock Rate:** 
+In most implementations of the library, a clock period is defined and data is clocked out at that speed. The Seeed Studio library uses a clock rate of 50kHz (40us period). This really isn't optimally fast as the P9813 can clock at 10MHz. At a rate this high, we're looking at a period of 100ns. Since the Arduino Uno's 16MHz ticks every 62.4 ns, you'd have to write the code very carefully to try to get near 10MHz rates. Instead, I just opted to take all delays out and let the library pulse as fast as it can (which is indeed fast enough). If you run this code on something with a much higher clock rate, like 50MHz, and you notice trasnmission errors, it would make sense to add some kind of delay to the clock function in `OpenSmartDriver.cpp`.
 
-**Color Accuracy:** In many RGB led systems, one main challenge is balancing all three LED intensities. You may find your driver skews toward green, which is natural and common. Mine sure do. To fix this I just tone the green down in the color codes, but I may add a library option for scaling green in the future.
+**Color Accuracy:** 
+In many RGB led systems, one main challenge is balancing all three LED intensities. You may find your driver skews toward green, which is natural and common. Mine sure do. To fix this I just tone the green down in the color codes, but I may add a library option for scaling green in the future.
 
 Enjoy!
+
+[driver]: https://img.dxcdn.com/productimages/sku_314667_1.jpg "Open-Smart Driver"
